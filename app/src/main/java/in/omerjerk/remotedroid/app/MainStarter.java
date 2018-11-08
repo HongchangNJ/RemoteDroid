@@ -15,8 +15,8 @@ public class MainStarter {
 
     private static final String TAG = "MainStarter";
 
-    private static final String COMMAND = "su -c \"CLASSPATH=%s /system/bin/app_process32 " +
-            "/system/bin in.omerjerk.remotedroid.app.Main\"\n";
+    private static final String COMMAND = "su -c \"export CLASSPATH=/sdcard/Main.dex /system/bin/app_process " +
+            "/sdcard in.omerjerk.remotedroid.app.Main\"\n";
 
     private Context context;
 
@@ -27,14 +27,16 @@ public class MainStarter {
     public void start() {
 //        Shell.SU.run(String.format(COMMAND, getApkLocation()));
         try {
-            Log.d(TAG, "===EXECUTING===" + String.format(COMMAND, getApkLocation()));
+            Log.d(TAG, "===EXECUTING===" + COMMAND);
             Process process = Runtime.getRuntime().exec("su");
             DataOutputStream outputStream = new DataOutputStream(process.getOutputStream());
-            outputStream.writeBytes(String.format(COMMAND, getApkLocation()));
+            outputStream.writeBytes(COMMAND);
             outputStream.flush();
             process.waitFor();
         } catch (IOException e) {
+            Log.d(TAG, "MainStarter: " + e.getMessage());
             e.printStackTrace();
+            Log.d(TAG, "MainStarter: " + e.getMessage());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -46,6 +48,7 @@ public class MainStarter {
         for (ApplicationInfo app : pm.getInstalledApplications(0)) {
 //            Log.d("PackageList", "package: " + app.packageName + ", sourceDir: " + app.sourceDir);
             if (app.packageName.equals(context.getPackageName())) {
+                Log.d(TAG, app.sourceDir);
                 return app.sourceDir;
             }
         }

@@ -106,6 +106,7 @@ public class ServerService extends Service {
             resolution.x = (int) (resolution.x * resolutionRatio);
             resolution.y = (int) (resolution.y * resolutionRatio);
 
+            Log.d(TAG, "LOCAL_DEBUG: " + LOCAL_DEBUG);
             if (!LOCAL_DEBUG) {
                 server = new AsyncHttpServer();
                 server.websocket("/", null, websocketCallback);
@@ -116,7 +117,7 @@ public class ServerService extends Service {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        showToast("Starting main touch server");
+                        //showToast("Starting main touch server");
                         new MainStarter(ServerService.this).start();
                         showToast("started main touch server");
                     }

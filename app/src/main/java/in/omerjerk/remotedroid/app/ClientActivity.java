@@ -126,10 +126,10 @@ public class ClientActivity extends Activity implements SurfaceHolder.Callback, 
                 public void onDataAvailable(DataEmitter dataEmitter, ByteBufferList byteBufferList) {
                         ++i;
                         ByteBuffer b = byteBufferList.getAll();
-//                        Log.d(TAG, "Received buffer = " + b);
+                        Log.d(TAG, "Received buffer = " + b);
                         if (i % 2 == 0) {
                             String temp = new String(b.array());
-//                            Log.d(TAG, "Received String = " + temp);
+                            Log.d(TAG, "Received String = " + temp);
                             infoStringParts = temp.split(",");
                             info.set(Integer.parseInt(infoStringParts[0]), Integer.parseInt(infoStringParts[1]),
                                     Long.parseLong(infoStringParts[2]), Integer.parseInt(infoStringParts[3]));

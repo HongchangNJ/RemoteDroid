@@ -60,8 +60,8 @@ public class MainActivity extends Activity {
             new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(Void... voids) {
-//                    final boolean isRooted = Shell.SU.available();
-                    final boolean isRooted = true;
+                    final boolean isRooted = Shell.SU.available();
+                    //final boolean isRooted = true;
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
